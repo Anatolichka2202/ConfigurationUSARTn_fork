@@ -104,7 +104,7 @@ void ConfigUsart(uint32_t usart, uint32_t baudrate, uint32_t msbf, uint8_t confi
 
         nvic_irq_enable(usartX_irqn, priority, sub_priority);
     }
-       usart_enable       (usart);
+    usart_enable(usart);
 
 
 }
@@ -324,7 +324,7 @@ void ConfigUsartDMA_Rx(enum usartDMA  usart, uint32_t* buf, uint32_t lenBuf, _Bo
         {
         case USART0:
         {
-            RX_irqn = USART1_IRQn;
+            RX_irqn = USART0_IRQn;
             break;
         }
         case USART1:
