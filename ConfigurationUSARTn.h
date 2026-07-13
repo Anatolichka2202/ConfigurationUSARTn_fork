@@ -303,7 +303,7 @@ void ConfigUsartDMA_Tx(uint32_t usart, uint8_t* buf, uint32_t lenBuf, _Bool circ
     \param[out] none
     \retval     none
 
-    \example:     ConfigUsartDMA_Rx (UART7, buffer_Rx,USART_BUFFER_SIZE,0,DMA_PRIORITY_HIGH,0,6,iRQn_full_transmit_Dma);
+    \example:     ConfigUsartDMA_Rx (UART7, buffer_Rx,USART_BUFFER_SIZE,0,DMA_PRIORITY_HIGH,0,6,iRQn_full_receiv_Dma);
 */
 void ConfigUsartDMA_Rx(uint32_t usart, uint8_t* buf, uint32_t lenBuf, _Bool circulationEnable,
     uint32_t channelPriorityDMA, uint8_t priority, uint8_t sub_priority, uint8_t iRQn);
