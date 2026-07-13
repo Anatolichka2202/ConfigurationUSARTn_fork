@@ -104,7 +104,6 @@ void ConfigUsart(uint32_t usart, uint32_t baudrate, uint32_t msbf, uint8_t confi
 
         nvic_irq_enable(usartX_irqn, priority, sub_priority);
     }
-       usart_enable       (usart);
 
 
 }
@@ -324,7 +323,7 @@ void ConfigUsartDMA_Rx(enum usartDMA  usart, uint32_t* buf, uint32_t lenBuf, _Bo
         {
         case USART0:
         {
-            RX_irqn = USART1_IRQn;
+            RX_irqn = USART0_IRQn;
             break;
         }
         case USART1:
@@ -659,16 +658,16 @@ void ConfigUsart(uint32_t usart, uint32_t baudrate, uint32_t msbf, uint32_t over
     \param[out] none
     \retval     none
 
-         dma_channel_disable                  (DMA0, DMA_CH3  );                                // Выключаем dma 
+         dma_channel_disable                  (DMA0, DMA_CH3  );                                // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ dma 
          dma_flag_clear                       (DMA0, DMA_CH3, DMA_FLAG_FTF );
          dma_channel_subperipheral_select     (DMA0, DMA_CH3, DMA_SUBPERI4 );
          dma_transfer_direction_config        (DMA0, DMA_CH3, DMA_MEMORY_TO_PERIPH );
          dma_memory_address_generation_config (DMA0, DMA_CH3, DMA_MEMORY_INCREASE_ENABLE );
          dma_priority_config                  (DMA0, DMA_CH3, DMA_PRIORITY_ULTRA_HIGH );
-         dma_memory_address_config            (DMA0, DMA_CH3, DMA_MEMORY_0, (uint32_t)usartX_buffer_tx );  // Указываем адрес буфера
+         dma_memory_address_config            (DMA0, DMA_CH3, DMA_MEMORY_0, (uint32_t)usartX_buffer_tx );  // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
          dma_periph_address_config            (DMA0, DMA_CH3, USARTn_DATA_ADDRESS(USART2) );
-         dma_transfer_number_config           (DMA0, DMA_CH3, USART_BUFFER_SIZE );               // Указываем количество данных
-         dma_channel_enable                   (DMA0, DMA_CH3  );                                // Включаем dma для передачи
+         dma_transfer_number_config           (DMA0, DMA_CH3, USART_BUFFER_SIZE );               // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+         dma_channel_enable                   (DMA0, DMA_CH3  );                                // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ dma пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 */
 void ConfigUsartDMA_Tx(uint32_t usart, uint8_t* buf, uint32_t lenBuf, _Bool circulationEnable,
     uint32_t channelPriorityDMA, uint8_t priority, uint8_t sub_priority, uint8_t iRQn)
@@ -1239,5 +1238,4 @@ void Usart_send_string(const void* const str, const uint32_t usart_perith)
 }
 
 #endif // SENDING_VIA_USART
-
 
