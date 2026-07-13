@@ -104,7 +104,6 @@ void ConfigUsart(uint32_t usart, uint32_t baudrate, uint32_t msbf, uint8_t confi
 
         nvic_irq_enable(usartX_irqn, priority, sub_priority);
     }
-    usart_enable(usart);
 
 
 }
