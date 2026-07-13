@@ -1,0 +1,46 @@
+name: Basic checks
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check required files
+        shell: bash
+        run: |
+          set -euo pipefail
+          for file in ConfigurationUSARTn.c ConfigurationUSARTn.h README.md ANALYSIS.md LICENSE; do
+            test -f "$file" || { echo "Missing required file: $file"; exit 1; }
+          done
+
+      - name: Check GD32 family selection
+        shell: bash
+        run: |
+          set -euo pipefail
+          count=$(grep -E '^\s*#define\s+GD32F(303|450)_' ConfigurationUSARTn.h | wc -l)
+          if [ "$count" -ne 1 ]; then
+            echo "ConfigurationUSARTn.h must enable exactly one GD32 family; found $count."
+            exit 1
+          fi
+
+      - name: Check forbidden Copilot references
+        shell: bash
+        run: |
+          set -euo pipefail
+          if grep -Rni --exclude-dir=.git --exclude-dir=.github 'copilot' .; then
+            echo "Forbidden Copilot reference found in repository files."
+            exit 1
+          fi
+
+      - name: Check whitespace errors
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check
